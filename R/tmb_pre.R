@@ -112,8 +112,8 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
     mtext(paste0(ttype," (R=",r,", P=",p,")"),3,cex=1,line=-1)
     
     # output results
-    write.out[i,1]<-obs.panel
-    write.out[i,2]<-z
+    write.out[j,1]<-obs.panel
+    write.out[j,2]<-z
     }
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
     dev.off()
