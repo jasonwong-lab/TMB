@@ -4,7 +4,7 @@
 \alias{tmb_pre}
 \title{TMBpredict}
 \usage{
-tmb_pre(ttype, mut, panel.bed)
+tmb_pre(ttype, mut, panel.bed, ftype)
 }
 \arguments{
 \item{ttype}{Tumor type}
@@ -12,6 +12,8 @@ tmb_pre(ttype, mut, panel.bed)
 \item{mut}{Detected mutations in VCF format}
 
 \item{panel.bed}{Panel region file in BED format}
+
+\item{ftype}{The type input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.}
 }
 \value{
 The adjusted TMB value and correlation figure

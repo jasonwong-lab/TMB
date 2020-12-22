@@ -1,9 +1,5 @@
-
 library(GenomicRanges)
 library(VariantAnnotation)
-
-
-
 
 # load data
 load("R/sysdata.rda")
@@ -18,11 +14,12 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param ttype Tumor type
 #' @param mut Detected mutations in VCF format
 #' @param panel.bed Panel region file in BED format
+#' @param ftype The type input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
 #' tmb_pre("COAD","sample.vcf","panel.bed")
 #' @export
-tmb_pre<-function(ttype,mut,panel.bed){
+tmb_pre<-function(ttype,mut,panel.bed,ftype){
   #panel bed
   panel.bed<-read.table(panel.bed)
   gr.panel<-GRanges(seqnames = Rle(panel.bed$V1),ranges = IRanges(panel.bed$V2,panel.bed$V3))
@@ -45,11 +42,6 @@ tmb_pre<-function(ttype,mut,panel.bed){
   colnames(final.data)<-c("panel","wes")
   rownames(final.data)<-sname
   
-  # upload mutations with vcf format
-  vcf <- readVcf(mut, "hg19")
-  gr.panel.mut<-rowRanges(vcf)
-  seqlevelsStyle(gr.panel.mut) <- "UCSC"
-  
   # model estimate
   region.exome=36.747178
   tmp<-data.frame(x=gr.panel)
@@ -58,6 +50,13 @@ tmb_pre<-function(ttype,mut,panel.bed){
   y<-final.data$wes/region.exome
   fit<-lm(y~x)
   max<-max(x,y)
+  
+  if(ftype=="s"){
+  # upload mutations with vcf format
+  vcf <- readVcf(mut, "hg19")
+  gr.panel.mut<-rowRanges(vcf)
+  seqlevelsStyle(gr.panel.mut) <- "UCSC"
+  
   obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
   z<-predict(fit,newdata=data.frame(x=obs.panel))
   if(z<0){z<-"Too few mut to estimate"}
@@ -80,5 +79,42 @@ tmb_pre<-function(ttype,mut,panel.bed){
   colnames(write.out)<-c("Observed mutations","Predicted TMB")
   write.out[1,]<-paste(round(write.out[1,],3),"mut/Mb")
   write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F,row.names = F)
+    } else if (ftype=="m"){
+    # upload mutations with tar.gz format
+    sap.list<-untar(mut,list=TRUE)
+    n.sap<-length(sap.list)
+    dev.new()
+    pdf("TMB_correlation.pdf",4,4)
+    par(mar=c(4,4,1,1),mgp=c(2,.5,0))
+    write.out<-data.frame(PANEL=rep(NA,n.sap),Predicted_WES=rep(NA,n.sap))
+    colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
+    rownames(write.out)<-gsub(".vcf","",sap.list)
+    
+    for (j in 1:n.sap){
+    vcf <- readVcf(sap.list[j], "hg19")
+    gr.panel.mut<-rowRanges(vcf)
+    seqlevelsStyle(gr.panel.mut) <- "UCSC"
+    
+    # model estimate
+    obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
+    z<-predict(fit,newdata=data.frame(x=obs.panel))
+    if(z<0){z<-"Too few mut to estimate"}
+    
+    # plot correlation of panel TMB and WES TMB for TCGA data
+    plot(x,y,xlim=c(0,max),ylim=c(0,max),xlab="Panel (mut/Mb)",ylab="WES (mut/Mb)")
+    fit<-lm(y~x)
+    abline(fit,lty=2,col="#fc8d62")
+    p<-signif(summary(fit)$coefficients[,4][2],5)
+    tmp<-cor.test(x,y)
+    r<-signif(tmp$estimate,3)
+    mtext(paste0(ttype," (R=",r,", P=",p,")"),3,cex=1,line=-1)
+    
+    # output results
+    write.out[i,1]<-obs.panel
+    write.out[i,2]<-z
+    }
+    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
+    dev.off()
+  }
 }
 
