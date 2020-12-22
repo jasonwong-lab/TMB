@@ -8,7 +8,9 @@ install_github("jasonwong-lab/TMB")`
 ```
 ## Usage guide
 ```R
-library(TMBpredict)  
+library(TMBpredict)
+library(GenomicRanges)
+library(VariantAnnotation)
 TMBpredict(ttype, mut, panel.bed, ftype)
 ```
 * ttype: \<strings\> Tumor type to be evaluated, should be one of these [33 cancer types](https://github.com/jasonwong-lab/TMB/blob/main/Cancer_type.txt).  
