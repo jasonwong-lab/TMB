@@ -17,9 +17,9 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param ftype The type of input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
-#' tmb_pre("COAD","sample.vcf","panel.bed","s")
+#' TMBpredict("COAD","sample.vcf","panel.bed","s")
 #' @export
-tmb_pre<-function(ttype,mut,panel.bed,ftype){
+TMBpredict<-function(ttype,mut,panel.bed,ftype){
   #panel bed
   panel.bed<-read.table(panel.bed)
   gr.panel<-GRanges(seqnames = Rle(panel.bed$V1),ranges = IRanges(panel.bed$V2,panel.bed$V3))
@@ -76,9 +76,11 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
   
     # output results
     write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
-    colnames(write.out)<-c("Observed mutations","Predicted TMB")
-    write.out[1,]<-paste(round(write.out[1,],3),"mut/Mb")
-    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F,row.names = F)
+    colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
+    sap.id<-gsub(".vcf","",mut)
+    rownames(write.out)<-sap.id
+    
+    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
   } else if (ftype=="m"){
     # upload mutations with tar.gz format
     sap.list<-untar(mut,list=TRUE)
