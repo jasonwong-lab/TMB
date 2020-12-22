@@ -6,7 +6,7 @@ Introduction
 ============ 
 This TMB (tumor mutational burden) prediction tool can optimize TMB that is derived from target region sequencing data. Linear regression is employed to modeling the relationship between whole coding regions derived TMB and panel derived mutations in this tool, and it is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). From the TCGA data module, you can get the landscape of TMB across different cancer types. By uploading mutation file and panel bed file, you can obtain the optimized TMB prediction. 
  
-https://github.com/jasonwong-lab/TMB/blob/main/ShinyApp/ui.png
+<p align="center"><img src="ui.png" alt="sigfit" width="700"/></p>
 
 TCGA data module
 ===========
