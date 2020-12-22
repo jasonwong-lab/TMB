@@ -6,6 +6,7 @@ library(VariantAnnotation)
 
 
 # load data
+load("R/sysdata.rda")
 # all coding region
 #' @export
 exome.bed<-exome.final.bed
