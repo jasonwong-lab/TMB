@@ -52,16 +52,6 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
   fit<-lm(y~x)
   max<-max(x,y)
   
-  if(ftype=="s"){
-  # upload mutations with vcf format
-  vcf <- readVcf(mut, "hg19")
-  gr.panel.mut<-rowRanges(vcf)
-  seqlevelsStyle(gr.panel.mut) <- "UCSC"
-  
-  obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
-  z<-predict(fit,newdata=data.frame(x=obs.panel))
-  if(z<0){z<-"Too few mut to estimate"}
-  
   # plot correlation of panel TMB and WES TMB for TCGA data
   dev.new()
   pdf("TMB_correlation.pdf",4,4)
@@ -75,6 +65,16 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
   mtext(paste0(ttype," (R=",r,", P=",p,")"),3,cex=1,line=-1)
   dev.off()
   
+  if(ftype=="s"){
+  # upload mutations with vcf format
+  vcf <- readVcf(mut, "hg19")
+  gr.panel.mut<-rowRanges(vcf)
+  seqlevelsStyle(gr.panel.mut) <- "UCSC"
+  
+  obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
+  z<-predict(fit,newdata=data.frame(x=obs.panel))
+  if(z<0){z<-"Too few mut to estimate"}
+  
   # output results
   write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
   colnames(write.out)<-c("Observed mutations","Predicted TMB")
@@ -85,9 +85,7 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
     sap.list<-untar(mut,list=TRUE)
     untar(mut)
     n.sap<-length(sap.list)
-    dev.new()
-    pdf("TMB_correlation.pdf",4,4)
-    par(mar=c(4,4,1,1),mgp=c(2,.5,0))
+    
     write.out<-data.frame(PANEL=rep(NA,n.sap),Predicted_WES=rep(NA,n.sap))
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
     rownames(write.out)<-gsub(".vcf","",sap.list)
@@ -101,22 +99,12 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
     obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
     z<-predict(fit,newdata=data.frame(x=obs.panel))
     if(z<0){z<-"Too few mut to estimate"}
-    
-    # plot correlation of panel TMB and WES TMB for TCGA data
-    plot(x,y,xlim=c(0,max),ylim=c(0,max),xlab="Panel (mut/Mb)",ylab="WES (mut/Mb)")
-    fit<-lm(y~x)
-    abline(fit,lty=2,col="#fc8d62")
-    p<-signif(summary(fit)$coefficients[,4][2],5)
-    tmp<-cor.test(x,y)
-    r<-signif(tmp$estimate,3)
-    mtext(paste0(ttype," (R=",r,", P=",p,")"),3,cex=1,line=-1)
-    
+ 
     # output results
     write.out[j,1]<-obs.panel
     write.out[j,2]<-z
     }
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
-    dev.off()
   }
 }
 
