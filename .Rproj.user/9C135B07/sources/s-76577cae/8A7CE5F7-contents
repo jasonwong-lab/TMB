@@ -4,7 +4,6 @@ library(VariantAnnotation)
 # load data
 load("R/sysdata.rda")
 # all coding region
-#' @export
 exome.bed<-exome.final.bed
 gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exome.bed$V3))
 
@@ -18,7 +17,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param ftype The type of input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
-#' tmb_pre("COAD","sample.vcf","panel.bed")
+#' tmb_pre("COAD","sample.vcf","panel.bed","s")
 #' @export
 tmb_pre<-function(ttype,mut,panel.bed,ftype){
   #panel bed
@@ -66,21 +65,21 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
   dev.off()
   
   if(ftype=="s"){
-  # upload mutations with vcf format
-  vcf <- readVcf(mut, "hg19")
-  gr.panel.mut<-rowRanges(vcf)
-  seqlevelsStyle(gr.panel.mut) <- "UCSC"
+    # upload mutations with vcf format
+    vcf <- readVcf(mut, "hg19")
+    gr.panel.mut<-rowRanges(vcf)
+    seqlevelsStyle(gr.panel.mut) <- "UCSC"
   
-  obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
-  z<-predict(fit,newdata=data.frame(x=obs.panel))
-  if(z<0){z<-"Too few mut to estimate"}
+    obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
+    z<-predict(fit,newdata=data.frame(x=obs.panel))
+    if(z<0){z<-"Too few mut to estimate"}
   
-  # output results
-  write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
-  colnames(write.out)<-c("Observed mutations","Predicted TMB")
-  write.out[1,]<-paste(round(write.out[1,],3),"mut/Mb")
-  write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F,row.names = F)
-    } else if (ftype=="m"){
+    # output results
+    write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
+    colnames(write.out)<-c("Observed mutations","Predicted TMB")
+    write.out[1,]<-paste(round(write.out[1,],3),"mut/Mb")
+    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F,row.names = F)
+  } else if (ftype=="m"){
     # upload mutations with tar.gz format
     sap.list<-untar(mut,list=TRUE)
     untar(mut)
@@ -91,20 +90,19 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
     rownames(write.out)<-gsub(".vcf","",sap.list)
     
     for (j in 1:n.sap){
-    vcf <- readVcf(sap.list[j], "hg19")
-    gr.panel.mut<-rowRanges(vcf)
-    seqlevelsStyle(gr.panel.mut) <- "UCSC"
+      vcf <- readVcf(sap.list[j], "hg19")
+      gr.panel.mut<-rowRanges(vcf)
+      seqlevelsStyle(gr.panel.mut) <- "UCSC"
     
-    # model estimate
-    obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
-    z<-predict(fit,newdata=data.frame(x=obs.panel))
-    if(z<0){z<-"Too few mut to estimate"}
+      # model estimate
+      obs.panel<-sum(countOverlaps(gr.panel.mut, gr.panel))/region.panel
+      z<-predict(fit,newdata=data.frame(x=obs.panel))
+      if(z<0){z<-"Too few mut to estimate"}
  
-    # output results
-    write.out[j,1]<-obs.panel
-    write.out[j,2]<-z
-    }
+      # output results
+      write.out[j,1]<-obs.panel
+      write.out[j,2]<-z
+      }
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
   }
 }
-
