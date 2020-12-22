@@ -10,7 +10,7 @@ install_github("jasonwong-lab/TMB")
 
 library(TMBpredict)  
 TMBpredict(ttype, mut, panel.bed, ftype)  
-* ttype: \<strings\> Tumor type to be evaluated, should be one of these 33 cancer types.  
+* ttype: \<strings\> Tumor type to be evaluated, should be one of these [33 cancer types](https://github.com/jasonwong-lab/TMB/blob/main/Cancer_type.txt).  
 * mut: \<strings\> Input mutation data in VCF format. Can be multiple VCF compressed in tar.gz.  
 * panel.bed: \<strings\> Input panel region data, BED (Browser Extensible Data) format is accepted and should at least include three columns: chromosome, start position and end position.  
 * ftype: \<strings\> The type of input mutation file. "s" for single VCF file and "m" for multiple VCF files compressed in tar.gz.  
