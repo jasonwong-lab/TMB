@@ -4,6 +4,7 @@ library(VariantAnnotation)
 # load data
 load("R/sysdata.rda")
 # all coding region
+#' @export
 exome.bed<-exome.final.bed
 gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exome.bed$V3))
 
@@ -14,7 +15,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param ttype Tumor type
 #' @param mut Detected mutations in VCF format
 #' @param panel.bed Panel region file in BED format
-#' @param ftype The type input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.
+#' @param ftype The type of input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
 #' tmb_pre("COAD","sample.vcf","panel.bed")

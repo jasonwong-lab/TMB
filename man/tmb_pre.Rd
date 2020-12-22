@@ -13,7 +13,7 @@ tmb_pre(ttype, mut, panel.bed, ftype)
 
 \item{panel.bed}{Panel region file in BED format}
 
-\item{ftype}{The type input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.}
+\item{ftype}{The type of input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.}
 }
 \value{
 The adjusted TMB value and correlation figure
