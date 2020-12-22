@@ -3,8 +3,8 @@ __TMBpredict__ is an R package can optimize TMB that is derived from target regi
 
 ## Installation
 
-library(devtools) # Make sure that the devtools library is loaded  
-install_github("jasonwong-lab/TMB")  
+`require(devtools) # Make sure that the devtools library is loaded`  
+`install_github("jasonwong-lab/TMB")`  
 
 ## Usage guide
 
