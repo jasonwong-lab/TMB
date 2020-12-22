@@ -2,10 +2,12 @@
 library(GenomicRanges)
 library(VariantAnnotation)
 
+
+
+
 # load data
-# source("R/get_data.R")
 # all coding region
-exome.bed<-read.table("data/region_bed/exome.final.bed")
+exome.bed<-exome.final.bed
 gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exome.bed$V3))
 
 # main function
@@ -27,14 +29,14 @@ tmb_pre<-function(ttype,mut,panel.bed){
   gr.panel<-pintersect(tmp)
   
   # calculate tcga muations in given panel (all mutations)
-  mut.exome.bed<-read.table(paste0("data/exome_all_bed/",ttype,".bed"))
+  mut.exome.bed<-all.mut.list[[ttype]]
   gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V6)
   tmp<-subsetByOverlaps(gr.exome.mut,gr.panel)
   panel.mut.cout<-as.data.frame(table(mcols(tmp)$sample))
   rownames(panel.mut.cout)<-panel.mut.cout$Var1
   
   # caluculate tcga muations in all coding region (non-syn mutations)
-  exome.mut.cout<-read.table(paste0("data/exome/",ttype,".exome.tmb.txt"),row.names = 1)
+  exome.mut.cout<-wes.tmb.list[[ttype]]
   
   # prepare correlation data
   sname<-intersect(rownames(panel.mut.cout),rownames(exome.mut.cout))
