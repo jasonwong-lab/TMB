@@ -1,2 +1,0 @@
-Observed mutations	Predicted TMB
-197.98 mut/Mb	150.748 mut/Mb
