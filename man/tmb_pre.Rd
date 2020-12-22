@@ -22,5 +22,5 @@ The adjusted TMB value and correlation figure
 Correct panel TMB evaluation by modeling adjustment.
 }
 \examples{
-tmb_pre("COAD","sample.vcf","panel.bed")
+tmb_pre("COAD","sample.vcf","panel.bed","s")
 }
