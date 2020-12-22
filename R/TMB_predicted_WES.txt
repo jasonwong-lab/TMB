@@ -1,0 +1,2 @@
+Observed mutations (mut/Mb)	Predicted TMB (mut/Mb)
+~/Projects/tmb/shiny/package/TMBpredict/test/single_file/COAD_test_sap	197.979858351015	150.747794903088
