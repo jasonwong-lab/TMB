@@ -23,11 +23,7 @@ TMBpredict(ttype, mut, panel.bed, ftype)
 TMBpredict("COAD","COAD_test_sap.vcf","msk_coding.bed","s")  
 TMBpredict("COAD","vcf.tar.gz","msk_coding.bed","m")
 ```
-Example data can be downloaded here:
-
-[COAD_test_sap.vcf](https://raw.githubusercontent.com/jasonwong-lab/TMB/master/test/single_file/COAD_test_sap.vcf)
-
-[vcf.tar.gz](https://github.com/jasonwong-lab/TMB/blob/master/test/multiple_file/vcf.tar.gz)
-
-[msk_coding.bed](https://github.com/jasonwong-lab/TMB/blob/master/test/multiple_file/msk_coding.bed)
-
+Example data can be downloaded here:<br>
+<a id="raw-url" href="https://raw.githubusercontent.com/jasonwong-lab/TMB/master/test/single_file/COAD_test_sap.vcf">COAD_test_sap.vcf</a><br>
+<a id="raw-url" href="https://raw.githubusercontent.com/jasonwong-lab/TMB/master/test/multiple_file/vcf.tar.gz">vcf.tar.gz</a><br>
+<a id="raw-url" href="https://raw.githubusercontent.com/jasonwong-lab/TMB/master/test/single_file/msk_coding.bed">msk_coding.bed</a>
