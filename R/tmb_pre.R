@@ -82,6 +82,7 @@ tmb_pre<-function(ttype,mut,panel.bed,ftype){
     } else if (ftype=="m"){
     # upload mutations with tar.gz format
     sap.list<-untar(mut,list=TRUE)
+    untar(mut)
     n.sap<-length(sap.list)
     dev.new()
     pdf("TMB_correlation.pdf",4,4)
