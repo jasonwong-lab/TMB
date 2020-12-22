@@ -7,6 +7,7 @@ library(VariantAnnotation)
 
 # load data
 # all coding region
+#' @export
 exome.bed<-exome.final.bed
 gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exome.bed$V3))
 
