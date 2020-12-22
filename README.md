@@ -3,13 +3,13 @@ __TMBpredict__ is an R package can optimize TMB that is derived from target regi
 
 ## Installation
 
-`require(devtools) # Make sure that the devtools library is loaded`  
-`install_github("jasonwong-lab/TMB")`  
+`require(devtools) # Make sure that the devtools library is loaded  
+install_github("jasonwong-lab/TMB")`  
 
 ## Usage guide
 
-library(TMBpredict)  
-TMBpredict(ttype, mut, panel.bed, ftype)  
+`library(TMBpredict)  
+TMBpredict(ttype, mut, panel.bed, ftype)`  
 * ttype: \<strings\> Tumor type to be evaluated, should be one of these [33 cancer types](https://github.com/jasonwong-lab/TMB/blob/main/Cancer_type.txt).  
 * mut: \<strings\> Input mutation data in VCF format. Can be multiple VCF compressed in tar.gz.  
 * panel.bed: \<strings\> Input panel region data, BED (Browser Extensible Data) format is accepted and should at least include three columns: chromosome, start position and end position.  
@@ -17,7 +17,7 @@ TMBpredict(ttype, mut, panel.bed, ftype)
 
 ## Examples
 
-TMBpredict("COAD","COAD_test_sap.vcf","msk_coding.bed","s")  
-TMBpredict("COAD","vcf.tar.gz","msk_coding.bed","m")  
+`TMBpredict("COAD","COAD_test_sap.vcf","msk_coding.bed","s")  
+TMBpredict("COAD","vcf.tar.gz","msk_coding.bed","m")`  
 Example data can be found at https://github.com/jasonwong-lab/TMB/tree/master/test
 
