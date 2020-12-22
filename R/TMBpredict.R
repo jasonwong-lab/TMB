@@ -52,7 +52,7 @@ TMBpredict<-function(ttype,mut,panel.bed,ftype){
   max<-max(x,y)
   
   # plot correlation of panel TMB and WES TMB for TCGA data
-  dev.new()
+  #dev.new()
   pdf("TMB_correlation.pdf",4,4)
   par(mar=c(4,4,1,1),mgp=c(2,.5,0))
   plot(x,y,xlim=c(0,max),ylim=c(0,max),xlab="Panel (mut/Mb)",ylab="WES (mut/Mb)")
