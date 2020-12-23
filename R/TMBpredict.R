@@ -80,7 +80,8 @@ TMBpredict<-function(ttype,mut,panel.bed){
     rownames(write.out)<-sap.id
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
-    #dev.off()
+    dev.off()
+    packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt).")
     return(write.out)
   } else {
     # upload mutations with tar.gz format
@@ -108,8 +109,8 @@ TMBpredict<-function(ttype,mut,panel.bed){
       }
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
-    #dev.off()
+    dev.off()
+    packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt).")
     return(write.out)
   }
 }
-packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt)!")
