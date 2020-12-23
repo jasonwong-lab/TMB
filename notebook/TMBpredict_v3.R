@@ -12,13 +12,14 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #'
 #' Correct panel TMB evaluation by modeling adjustment.
 #' @param ttype Tumor type
-#' @param mut Detected mutations in VCF format. Also accept multiple VCF compressed in .tar.gz.
+#' @param mut Detected mutations in VCF format
 #' @param panel.bed Panel region file in BED format
+#' @param ftype The type of input mutation file,"s" for single VCF file,"m" for multiple VCF files compressed with tar.gz.
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
-#' TMBpredict("COAD","sample.vcf","panel.bed")
+#' TMBpredict("COAD","sample.vcf","panel.bed","s")
 #' @export
-TMBpredict<-function(ttype,mut,panel.bed){
+TMBpredict<-function(ttype,mut,panel.bed,ftype){
   #panel bed
   panel.bed<-read.table(panel.bed)
   gr.panel<-GRanges(seqnames = Rle(panel.bed$V1),ranges = IRanges(panel.bed$V2,panel.bed$V3))
@@ -61,9 +62,9 @@ TMBpredict<-function(ttype,mut,panel.bed){
   tmp<-cor.test(x,y)
   r<-signif(tmp$estimate,3)
   mtext(paste0(ttype," (R=",r,", P=",p,")"),3,cex=1,line=-1)
+  dev.off()
   
-  
-  if(length(grep(".tar",mut,fixed=T))!=1){
+  if(ftype=="s"){
     # upload mutations with vcf format
     vcf <- readVcf(mut, "hg19")
     gr.panel.mut<-rowRanges(vcf)
@@ -76,13 +77,11 @@ TMBpredict<-function(ttype,mut,panel.bed){
     # output results
     write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
-    sap.id<-gsub(".vcf","",basename(mut))
+    sap.id<-gsub(".vcf","",mut)
     rownames(write.out)<-sap.id
+    
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
-    points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
-    #dev.off()
-    return(write.out)
-  } else {
+  } else if (ftype=="m"){
     # upload mutations with tar.gz format
     sap.list<-untar(mut,list=TRUE)
     untar(mut)
@@ -90,7 +89,7 @@ TMBpredict<-function(ttype,mut,panel.bed){
     
     write.out<-data.frame(PANEL=rep(NA,n.sap),Predicted_WES=rep(NA,n.sap))
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
-    rownames(write.out)<-gsub(".vcf","",basename(sap.list))
+    rownames(write.out)<-gsub(".vcf","",sap.list)
     
     for (j in 1:n.sap){
       vcf <- readVcf(sap.list[j], "hg19")
@@ -107,9 +106,5 @@ TMBpredict<-function(ttype,mut,panel.bed){
       write.out[j,2]<-z
       }
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
-    points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
-    #dev.off()
-    return(write.out)
   }
 }
-packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt)!")
