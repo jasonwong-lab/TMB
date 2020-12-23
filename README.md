@@ -18,3 +18,8 @@ VCF (variant call format) format is accepted for the input mutation data. For th
 ## Availability
 
 The app is available at: https://cancergenomics-explore.shinyapps.io/shiny_tmb/
+
+## Note
+
+The stand-alone R package can be downloaded at: https://github.com/jasonwong-lab/TMB/tree/master
+
