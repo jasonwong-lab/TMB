@@ -12,10 +12,10 @@ install_github("jasonwong-lab/TMB")
 library(TMBpredict)
 library(GenomicRanges)
 library(VariantAnnotation)
-TMBpredict(ttype, mut, panel.bede)
+TMBpredict(ttype, mut, panel.bed)
 ```
 * ttype: \<strings\> Tumor type to be evaluated, should be one of these [33 cancer types](https://github.com/jasonwong-lab/TMB/blob/main/Cancer_type.txt).  
-* mut: \<strings\> Detected mutations in VCF format. Also accept multiple VCF compressed in .tar.gz.  
+* mut: \<strings\> Detected mutations in VCF format. Also accept multiple VCF compressed in *.tar.gz.  
 * panel.bed: \<strings\> Input panel region data, BED (Browser Extensible Data) format is accepted and should at least include three columns: chromosome, start position and end position.   
 
 ## Examples
