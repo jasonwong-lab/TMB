@@ -16,9 +16,15 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param panel.bed Panel region file in BED format
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
+<<<<<<< HEAD:notebook/TMBpredict_v4.R
 #' TMBpredict("COAD","sample.vcf","panel.bed")
 #' @export
 TMBpredict<-function(ttype,mut,panel.bed){
+=======
+#' TMBpredict("COAD","sample.vcf","panel.bed","s")
+#' @export
+TMBpredict<-function(ttype,mut,panel.bed,ftype){
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de:.Rproj.user/9C135B07/sources/s-76577cae/8A7CE5F7-contents
   #panel bed
   panel.bed<-read.table(panel.bed)
   gr.panel<-GRanges(seqnames = Rle(panel.bed$V1),ranges = IRanges(panel.bed$V2,panel.bed$V3))
@@ -76,6 +82,7 @@ TMBpredict<-function(ttype,mut,panel.bed){
     # output results
     write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
+<<<<<<< HEAD:notebook/TMBpredict_v4.R
     sap.id<-gsub(".vcf","",basename(mut))
     rownames(write.out)<-sap.id
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
@@ -84,6 +91,13 @@ TMBpredict<-function(ttype,mut,panel.bed){
     packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt).")
     return(write.out)
   } else {
+=======
+    sap.id<-gsub(".vcf","",mut)
+    rownames(write.out)<-sap.id
+    
+    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
+  } else if (ftype=="m"){
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de:.Rproj.user/9C135B07/sources/s-76577cae/8A7CE5F7-contents
     # upload mutations with tar.gz format
     sap.list<-untar(mut,list=TRUE)
     untar(mut)

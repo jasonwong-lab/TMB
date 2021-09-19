@@ -14,6 +14,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param ttype Tumor type
 #' @param mut Detected mutations in VCF format. Also accept multiple VCF compressed in .tar.gz.
 #' @param panel.bed Panel region file in BED format
+<<<<<<< HEAD
 #' @param convert.type Convert Panel to WES or reversely
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
@@ -27,6 +28,13 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
   # WES to Panel
   #=============
   if(convert.type=="panel2wes"){
+=======
+#' @return The adjusted TMB value and correlation figure
+#' @examples 
+#' TMBpredict("COAD","sample.vcf","panel.bed")
+#' @export
+TMBpredict<-function(ttype,mut,panel.bed){
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
   #panel bed
   panel.bed<-read.table(panel.bed)
   gr.panel<-GRanges(seqnames = Rle(panel.bed$V1),ranges = IRanges(panel.bed$V2,panel.bed$V3))
@@ -35,7 +43,11 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
   
   # calculate tcga muations in given panel (all mutations)
   mut.exome.bed<-all.mut.list[[ttype]]
+<<<<<<< HEAD
   gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V4)
+=======
+  gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V6)
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
   tmp<-subsetByOverlaps(gr.exome.mut,gr.panel)
   panel.mut.cout<-as.data.frame(table(mcols(tmp)$sample))
   rownames(panel.mut.cout)<-panel.mut.cout$Var1
@@ -83,6 +95,7 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
   
     # output results
     write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
+<<<<<<< HEAD
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted WES TMB (mut/Mb)")
     sap.id<-gsub(".vcf","",basename(mut))
     rownames(write.out)<-sap.id
@@ -90,6 +103,15 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
     dev.off()
     packageStartupMessage("The conversion is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_convert.txt).")
+=======
+    colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
+    sap.id<-gsub(".vcf","",basename(mut))
+    rownames(write.out)<-sap.id
+    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
+    points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
+    dev.off()
+    packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt).")
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
     return(write.out)
   } else {
     # upload mutations with tar.gz format
@@ -98,7 +120,11 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
     n.sap<-length(sap.list)
     
     write.out<-data.frame(PANEL=rep(NA,n.sap),Predicted_WES=rep(NA,n.sap))
+<<<<<<< HEAD
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted WES TMB (mut/Mb)")
+=======
+    colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
     rownames(write.out)<-gsub(".vcf","",basename(sap.list))
     
     for (j in 1:n.sap){
@@ -115,6 +141,7 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
       write.out[j,1]<-obs.panel
       write.out[j,2]<-z
       }
+<<<<<<< HEAD
     write.table(write.out,"TMB_convert.txt",sep = "\t",quote = F)
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
     dev.off()
@@ -228,3 +255,12 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
   }
 # wes2panel end
 }
+=======
+    write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
+    points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
+    dev.off()
+    packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt).")
+    return(write.out)
+  }
+}
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de

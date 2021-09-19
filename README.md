@@ -32,6 +32,7 @@ Example data can be downloaded here:<br>
 ## Note
 Web-based shiny App can be found at: https://cancergenomics-explore.shinyapps.io/shiny_tmb/
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1e00abcc465be1436f85e656dadce6db38174510
 =======
 
@@ -60,5 +61,7 @@ The app is available at: https://cancergenomics-explore.shinyapps.io/shiny_tmb/
 The stand-alone R package can be downloaded at: https://github.com/jasonwong-lab/TMB/tree/master
 
 >>>>>>> 48c7d6356ec6c3e89c3284f69f6f60c7fa4741ce
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 =======
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
