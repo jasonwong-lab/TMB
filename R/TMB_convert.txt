@@ -1,2 +1,0 @@
-Observed mutations (mut/Mb)	Predicted WES TMB (mut/Mb)
-COAD_test_sap	197.979858351015	4.10229582535801
