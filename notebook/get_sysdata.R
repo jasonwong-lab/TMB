@@ -9,7 +9,8 @@ pwd<-"/home/fanghu/Projects/tmb/shiny/package/TMBpredict/data/exome/"
 for(i in 1:n){
   tmp<-paste0(pwd,ttype[i],".exome.tmb.txt")
   tmp1<-read.table(tmp,row.names = 1)
-  wes.tmb.list[[ttype[i]]]=tmp1[,1]/region.exome
+  tmp1[,1]<-tmp1[,1]/region.exome
+  wes.tmb.list[[ttype[i]]]=tmp1
 }
 
 #=========== get exome all mut bed==================

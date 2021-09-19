@@ -3,6 +3,7 @@ library(VariantAnnotation)
 
 # load data
 load("R/sysdata.rda")
+#load("sysdata.rda")
 # all coding region
 exome.bed<-exome.final.bed
 gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exome.bed$V3))
@@ -21,8 +22,11 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @export
 
 
-TMBpredict<-function(ttype,mut,panel.bed,convert.type){
-  
+ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
+   ttype="COAD"
+   mut="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/COAD_test_sap.vcf"
+   panel.bed="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/msk_coding.bed"
+   convert.type="panel2wes"
   #==============  
   # WES to Panel
   #=============
