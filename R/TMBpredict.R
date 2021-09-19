@@ -23,10 +23,10 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 
 
  TMBpredict<-function(ttype,mut,panel.bed,convert.type){
-   ttype="COAD"
-   mut="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/COAD_test_sap.vcf"
-   panel.bed="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/msk_coding.bed"
-   convert.type="panel2wes"
+   # ttype="COAD"
+   # mut="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/COAD_test_sap.vcf"
+   # panel.bed="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/msk_coding.bed"
+   # convert.type="panel2wes"
   #==============  
   # WES to Panel
   #=============
