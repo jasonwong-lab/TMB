@@ -28,7 +28,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
    # panel.bed="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/msk_coding.bed"
    # convert.type="panel2wes"
   #==============  
-  # WES to Panel
+  # panel to WES
   #=============
   if(convert.type=="panel2wes"){
   #panel bed
@@ -130,6 +130,11 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #==============  
 # WES to Panel
 #=============
+   # ttype="COAD"
+   # mut="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/HCT116GCVMMF.vcf"
+   # panel.bed="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/msk_coding.bed"
+   # convert.type="wes2panel"
+   
   if(convert.type=="wes2panel"){
     #panel bed
     panel.bed<-read.table(panel.bed)
@@ -145,9 +150,9 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
     rownames(panel.mut.cout)<-panel.mut.cout$Var1
     
     # caluculate tcga muations in all coding region (non-syn mutations)
-    mut.exome.bed1<-ns.mut.list[[ttype]]
+    mut.exome.bed1<-all.ns.list[[ttype]]
     gr.exome.mut1<-GRanges(seqnames = Rle(mut.exome.bed1$V1),ranges = IRanges(mut.exome.bed1$V2,mut.exome.bed1$V2),sample=mut.exome.bed1$V6)
-    tmp1<-subsetByOverlaps(gr.exome.mut1,gr.f1cdx)
+    tmp1<-subsetByOverlaps(gr.exome.mut1,gr.panel)
     exome.mut.cout<-as.data.frame(table(mcols(tmp1)$sample))
     rownames(exome.mut.cout)<-exome.mut.cout$Var1
     
