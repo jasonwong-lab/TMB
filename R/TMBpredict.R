@@ -35,7 +35,7 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
   
   # calculate tcga muations in given panel (all mutations)
   mut.exome.bed<-all.mut.list[[ttype]]
-  gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V4)
+  gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V6)
   tmp<-subsetByOverlaps(gr.exome.mut,gr.panel)
   panel.mut.cout<-as.data.frame(table(mcols(tmp)$sample))
   rownames(panel.mut.cout)<-panel.mut.cout$Var1
@@ -135,14 +135,14 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
     
     # calculate tcga muations in given panel or exome(all mutations)
     mut.exome.bed<-all.mut.list[[ttype]]
-    gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V4)
+    gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V6)
     tmp<-subsetByOverlaps(gr.exome.mut,gr.exome)
     panel.mut.cout<-as.data.frame(table(mcols(tmp)$sample))
     rownames(panel.mut.cout)<-panel.mut.cout$Var1
     
     # caluculate tcga muations in all coding region (non-syn mutations)
     mut.exome.bed1<-ns.mut.list[[ttype]]
-    gr.exome.mut1<-GRanges(seqnames = Rle(mut.exome.bed1$V1),ranges = IRanges(mut.exome.bed1$V2,mut.exome.bed1$V2),sample=mut.exome.bed1$V4)
+    gr.exome.mut1<-GRanges(seqnames = Rle(mut.exome.bed1$V1),ranges = IRanges(mut.exome.bed1$V2,mut.exome.bed1$V2),sample=mut.exome.bed1$V6)
     tmp1<-subsetByOverlaps(gr.exome.mut1,gr.f1cdx)
     exome.mut.cout<-as.data.frame(table(mcols(tmp1)$sample))
     rownames(exome.mut.cout)<-exome.mut.cout$Var1
