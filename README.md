@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 ## Panel tumor mutational burden (TMB) correction
 
 __TMBpredict__ is an R package can optimize TMB that is derived from target region sequencing data. Linear regression is employed to modeling the relationship between whole coding regions derived TMB and panel derived mutations in this tool, and it is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). 
@@ -33,6 +36,7 @@ Example data can be downloaded here:<br>
 Web-based shiny App can be found at: https://cancergenomics-explore.shinyapps.io/shiny_tmb/
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1e00abcc465be1436f85e656dadce6db38174510
 =======
 
@@ -61,6 +65,8 @@ The app is available at: https://cancergenomics-explore.shinyapps.io/shiny_tmb/
 The stand-alone R package can be downloaded at: https://github.com/jasonwong-lab/TMB/tree/master
 
 >>>>>>> 48c7d6356ec6c3e89c3284f69f6f60c7fa4741ce
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 =======
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 =======

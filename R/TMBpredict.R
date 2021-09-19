@@ -15,6 +15,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' @param mut Detected mutations in VCF format. Also accept multiple VCF compressed in .tar.gz.
 #' @param panel.bed Panel region file in BED format
 <<<<<<< HEAD
+<<<<<<< HEAD
 #' @param convert.type Convert Panel to WES or reversely
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
@@ -29,11 +30,16 @@ TMBpredict<-function(ttype,mut,panel.bed,convert.type){
   #=============
   if(convert.type=="panel2wes"){
 =======
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 #' @return The adjusted TMB value and correlation figure
 #' @examples 
 #' TMBpredict("COAD","sample.vcf","panel.bed")
 #' @export
 TMBpredict<-function(ttype,mut,panel.bed){
+<<<<<<< HEAD
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
+=======
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
   #panel bed
   panel.bed<-read.table(panel.bed)
@@ -44,7 +50,11 @@ TMBpredict<-function(ttype,mut,panel.bed){
   # calculate tcga muations in given panel (all mutations)
   mut.exome.bed<-all.mut.list[[ttype]]
 <<<<<<< HEAD
+<<<<<<< HEAD
   gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V4)
+=======
+  gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V6)
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 =======
   gr.exome.mut<-GRanges(seqnames = Rle(mut.exome.bed$V1),ranges = IRanges(mut.exome.bed$V2,mut.exome.bed$V2),sample=mut.exome.bed$V6)
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
@@ -96,6 +106,7 @@ TMBpredict<-function(ttype,mut,panel.bed){
     # output results
     write.out<-data.frame(PANEL=obs.panel,Predicted_WES=z)
 <<<<<<< HEAD
+<<<<<<< HEAD
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted WES TMB (mut/Mb)")
     sap.id<-gsub(".vcf","",basename(mut))
     rownames(write.out)<-sap.id
@@ -104,6 +115,8 @@ TMBpredict<-function(ttype,mut,panel.bed){
     dev.off()
     packageStartupMessage("The conversion is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_convert.txt).")
 =======
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
     sap.id<-gsub(".vcf","",basename(mut))
     rownames(write.out)<-sap.id
@@ -111,6 +124,9 @@ TMBpredict<-function(ttype,mut,panel.bed){
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
     dev.off()
     packageStartupMessage("The prediction is successfully finished and the outputs are stored in working directory (TMB_correlation.pdf and TMB_predicted_WES.txt).")
+<<<<<<< HEAD
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
+=======
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
     return(write.out)
   } else {
@@ -121,7 +137,11 @@ TMBpredict<-function(ttype,mut,panel.bed){
     
     write.out<-data.frame(PANEL=rep(NA,n.sap),Predicted_WES=rep(NA,n.sap))
 <<<<<<< HEAD
+<<<<<<< HEAD
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted WES TMB (mut/Mb)")
+=======
+    colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 =======
     colnames(write.out)<-c("Observed mutations (mut/Mb)","Predicted TMB (mut/Mb)")
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
@@ -141,6 +161,7 @@ TMBpredict<-function(ttype,mut,panel.bed){
       write.out[j,1]<-obs.panel
       write.out[j,2]<-z
       }
+<<<<<<< HEAD
 <<<<<<< HEAD
     write.table(write.out,"TMB_convert.txt",sep = "\t",quote = F)
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
@@ -256,6 +277,8 @@ TMBpredict<-function(ttype,mut,panel.bed){
 # wes2panel end
 }
 =======
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
     write.table(write.out,"TMB_predicted_WES.txt",sep = "\t",quote = F)
     points(write.out[,1],write.out[,2],col="#e41a1c",pch=16)
     dev.off()
@@ -263,4 +286,7 @@ TMBpredict<-function(ttype,mut,panel.bed){
     return(write.out)
   }
 }
+<<<<<<< HEAD
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
+=======
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de

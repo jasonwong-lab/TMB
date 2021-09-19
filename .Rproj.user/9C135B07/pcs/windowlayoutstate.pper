@@ -2,8 +2,13 @@
     "left" : {
         "panelheight" : 504,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "splitterpos" : 206,
         "topwindowstate" : "HIDE",
+=======
+        "splitterpos" : 271,
+        "topwindowstate" : "NORMAL",
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
 =======
         "splitterpos" : 271,
         "topwindowstate" : "NORMAL",
@@ -14,8 +19,11 @@
         "panelheight" : 504,
         "splitterpos" : 345,
 <<<<<<< HEAD
+<<<<<<< HEAD
         "topwindowstate" : "MINIMIZE",
 =======
+=======
+>>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
         "topwindowstate" : "NORMAL",
 >>>>>>> a3f0b68f59539076c21443d34195f11d22ba28de
         "windowheight" : 578
