@@ -1,2 +1,0 @@
-tar -cjf vcf.tar.bz2 TCGA-AX-A0J1.vcf TCGA-SJ-A6ZI.vcf TCGA-VQ-A91D.vcf
-tar -czf vcf.tar.gz TCGA-AX-A0J1.vcf TCGA-SJ-A6ZI.vcf TCGA-VQ-A91D.vcf
