@@ -1,2 +1,0 @@
-Observed mutations (mut/Mb)	Predicted TMB (mut/Mb)
-TCGA-VQ-A91D	89.6512566117802	66.9099897472835

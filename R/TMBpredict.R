@@ -58,7 +58,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
   tmp<-data.frame(x=gr.panel)
   region.panel=sum(tmp[,3]-tmp[,2])/1000000
   x<-final.data$panel/region.panel
-  y<-final.data$wes/region.exome
+  y<-final.data$wes
   fit<-lm(y~x)
   max<-max(x,y)
   
