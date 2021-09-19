@@ -4,7 +4,7 @@
 \alias{TMBpredict}
 \title{TMBpredict}
 \usage{
-TMBpredict(ttype, mut, panel.bed)
+TMBpredict(ttype, mut, panel.bed, convert.type)
 }
 \arguments{
 \item{ttype}{Tumor type}
@@ -12,6 +12,8 @@ TMBpredict(ttype, mut, panel.bed)
 \item{mut}{Detected mutations in VCF format. Also accept multiple VCF compressed in .tar.gz.}
 
 \item{panel.bed}{Panel region file in BED format}
+
+\item{convert.type}{Convert Panel to WES or reversely}
 }
 \value{
 The adjusted TMB value and correlation figure
@@ -20,5 +22,5 @@ The adjusted TMB value and correlation figure
 Correct panel TMB evaluation by modeling adjustment.
 }
 \examples{
-TMBpredict("COAD","sample.vcf","panel.bed")
+TMBpredict("COAD","sample.vcf","panel.bed","panel2wes")
 }
