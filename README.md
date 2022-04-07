@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This TMB (tumor mutational burden) prediction tool can harmonize TMB that is derived from target region and whole exome sequencing data. Linear regression is employed to modeling the relationship between whole coding regions derived TMB and panel derived mutations in this tool, and it is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). From the TCGA data module, you can get the landscape of TMB across different cancer types. By uploading mutation file and panel bed file, you can obtain the normalised TMB prediction. 
+This TMB (tumor mutational burden) prediction tool can harmonize TMB that is derived from different genomic regions. Linear regression model is employed to assess the relationship between mutation counts from different genomic regions in this tool, and the evaluation is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). From the TCGA data module, you can get the landscape of TMB across different cancer types. By uploading mutation file and panel bed file, you can obtain the predicted TMB from another genomic region.  
  
 <p align="center"><img src="ui.png"/></p>
 
@@ -13,7 +13,7 @@ Mutation burden of each cancer type from TCGA pan-cancer data can be checked in 
 
 ## My data module
 
-VCF (variant call format) format is accepted for the input mutation data. For the input panel region data, BED (Browser Extensible Data) format is accepted and should at least include three columns: chromosome, start position and end position. The coordinate is 0-based. After uploading required files, the correlation of panel mutation and whole exome TMB based on TCGA data is provided and the adjusted TMB is reported.
+VCF (variant call format) format is accepted for the input mutation data. For the input panel region data, BED (Browser Extensible Data) format is accepted and should at least include three columns: chromosome, start position and end position. The coordinate is 0-based. After uploading required files, the correlation of TMB from Panel A (from) and Panel B (to) is provided and the adjusted TMB is reported.
 
 ## Availability
 
