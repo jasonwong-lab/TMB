@@ -1,6 +1,6 @@
 ## Panel tumor mutational burden (TMB) correction
 
-__TMBpredict__ is an R package can optimize TMB that is derived from target region sequencing data. Linear regression is employed to modeling the relationship between whole coding regions derived TMB and panel derived mutations in this tool, and it is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). 
+__TMBpredict__ is an R package can optimize TMB that is derived from target region sequencing data. Two layer Poisson model is employed to modeling the relationship between whole coding regions derived TMB and panel derived mutations in this tool, and it is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). 
 
 ## Installation
 ```R
