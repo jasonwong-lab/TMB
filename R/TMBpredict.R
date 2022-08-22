@@ -21,7 +21,7 @@ gr.exome<-GRanges(seqnames = Rle(exome.bed$V1),ranges = IRanges(exome.bed$V2,exo
 #' TMBpredict("COAD","sample.vcf","panel.bed","panel2wes")
 #' @export
 
-
+# will implement by two layer Poisson model.
  TMBpredict<-function(ttype,mut,panel.bed,convert.type){
    # ttype="COAD"
    # mut="~/Projects/tmb/shiny/package/TMBpredict/test/single_file/COAD_test_sap.vcf"
