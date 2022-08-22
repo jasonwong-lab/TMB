@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This TMB (tumor mutational burden) prediction tool can harmonize TMB that is derived from different genomic regions. Linear regression model is employed to assess the relationship between mutation counts from different genomic regions in this tool, and the evaluation is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). From the TCGA data module, you can get the landscape of TMB across different cancer types. By uploading mutation file and panel bed file, you can obtain the predicted TMB from another genomic region.  
+This TMB (tumor mutational burden) prediction tool can harmonize TMB that is derived from different genomic regions. Two layer Poisson model is employed to assess the relationship between mutation counts from different genomic regions in this tool, and the evaluation is based on pan-cancer data of 10,179 samples across 33 cancer types from The Cancer Genome Atlas (TCGA). From the TCGA data module, you can get the landscape of TMB across different cancer types. By uploading mutation file and panel bed file, you can obtain the predicted TMB from another genomic region.  
  
 <p align="center"><img src="screenshot.png"/></p>
 
