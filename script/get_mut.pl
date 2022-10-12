@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w 
 use strict;
-my ($in,$out)=@ARGV;
+my ($in)=@ARGV;
 open IN,$in;
 #open IN,"test.txt";
-open OUT,">$out";
+#open OUT,">$out";
 my %hash;
 while(<IN>){
 	chomp;
@@ -33,6 +33,6 @@ foreach my $sap (keys %hash){
 	$hash{$sap}{"TC"}=0 if(!exists $hash{$sap}{"TC"});
 	$hash{$sap}{"TG"}=0 if(!exists $hash{$sap}{"TG"});
 	$hash{$sap}{"indel"}=0 if(!exists $hash{$sap}{"indel"});
-	print OUT "$sap\t$hash{$sap}{\"CA\"}\t$hash{$sap}{\"CG\"}\t$hash{$sap}{\"CT\"}\t$hash{$sap}{\"TA\"}\t$hash{$sap}{\"TC\"}\t$hash{$sap}{\"TG\"}\t$hash{$sap}{\"indel\"}\n";
+	print "$sap\t$hash{$sap}{\"CA\"}\t$hash{$sap}{\"CG\"}\t$hash{$sap}{\"CT\"}\t$hash{$sap}{\"TA\"}\t$hash{$sap}{\"TC\"}\t$hash{$sap}{\"TG\"}\t$hash{$sap}{\"indel\"}\n";
 }
-close OUT;
+#close OUT;
