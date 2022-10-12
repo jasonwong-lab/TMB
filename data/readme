@@ -1,2 +1,0 @@
-cp /home/fanghu/Projects/tmb/data/ucsc_gdc/hg19_data_allsnv_indel/total/GDC-PANCAN.mutect2_snv_hg19.bed GDC-PANCAN.mutect2_snv_hg19_all.bed
-cp ~/Projects/tmb/data/ucsc_gdc/hg19_data_nonsysnv_indel/total/GDC-PANCAN.mutect2_snv_hg19.bed GDC-PANCAN.mutect2_snv_hg19_nosilent.bed
