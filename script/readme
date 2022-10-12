@@ -1,0 +1,5 @@
+intersectBed -a ~/Projects/tmb/data/ucsc_gdc/hg19_data_nonsysnv_indel/total/GDC-PANCAN.mutect2_snv_hg19.bed -b $panel |
+perl get_mut.pl all.bed MSK-IMPACT341_all_mut.txt
+
+nucBed  -fi ~/Database/HG19_UCSC/hg19_ucsc.fasta -bed DFCI-ONCOPANEL-3.bed|sed 1d |perl -lane 'BEGIN{$a=0;$t=0;$g=0;$c=0;}{$a+=$F[5];$c+=$F[6];$g+=$F[7];$t+=$F[8]}END{print "$a\t$c\t$g\t$t"}' > DFCI-ONCOPANEL-3.bed.nuc
+
