@@ -1,3 +1,10 @@
+args<-commandArgs(TRUE)
+input_mutations<-args[1]
+panel_mut<-args[2]
+panel_nuc<-args[3]
+expected_panel_mut<-args[4]
+expected_panel_nuc<-args[5]
+
 #-------------------------------------------------------------------------
 #                      model development
 #-------------------------------------------------------------------------
@@ -5,8 +12,7 @@
 train_poisson_smb <- function(counts.exome, exposures.exome, rates.panel) {
   mut.types <- names(rates.panel);
   names(mut.types) <- mut.types;
-  
-  fits <- lapply(
+    fits <- lapply(
     mut.types,
     function(mut.type) {
       d <- data.frame(
@@ -70,8 +76,8 @@ predict_poisson_smb_2l <- function(model, smb.panel) {
 #                             PREPARE DATA 
 #----------------------------------------------------------------------------
 #STEP 1
-counts.exome<- read.table("~/Projects/tmb/JNCC/David/tmb-calib-main_modify/data/mut_count/Exome_nonsilent_mut.txt", sep="\t", row.names=1, header=FALSE);
-counts.panel<- read.table("~/Projects/tmb/JNCC/data/region_mut/MSK-IMPACT410/MSK-IMPACT410_all_mut.txt", sep="\t", row.names=1, header=FALSE);
+counts.exome<- read.table(expected_panel_mut, sep="\t", row.names=1, header=FALSE);
+counts.panel<- read.table(panel_mut, sep="\t", row.names=1, header=FALSE);
 sap.name<-intersect(rownames(counts.exome),rownames(counts.panel))
 counts.exome<-counts.exome[sap.name,]
 colnames(counts.exome) <- c("c_a", "c_g", "c_t", "t_a", "t_c", "t_g", "indel");
@@ -79,7 +85,7 @@ counts.panel<-counts.panel[sap.name,]
 colnames(counts.panel) <- c("c_a", "c_g", "c_t", "t_a", "t_c", "t_g", "indel");
 
 #STEP 2
-opps.exome <- read.table("~/Projects/tmb/JNCC/David/tmb-calib-main_modify/data/nuc_content/Exome.final.bed.nuc", sep="\t", header=FALSE);
+opps.exome <- read.table(expected_panel_nuc, sep="\t", header=FALSE);
 colnames(opps.exome) <- c("a", "c", "g", "t")
 opps.exome <- as.matrix(opps.exome)[1,];
 exposures.exome <- list(
@@ -93,7 +99,7 @@ exposures.exome <- list(
 );
 
 #STEP 3
-opps.panel <- read.table("~/Projects/tmb/JNCC/data/region_bed/MSK-IMPACT410.bed.nuc", sep="\t", header=FALSE);
+opps.panel <- read.table(panel_nuc, sep="\t", header=FALSE);
 colnames(opps.panel) <- c("a", "c", "g", "t")
 opps.panel <- as.matrix(opps.panel)[1,];
 exposures.panel <- list(
@@ -127,7 +133,8 @@ possion.model<-train_poisson_smb_2l(counts.exome, exposures.exome, rates.panel)
 #-----------------------------------------------------------------------
 #   INPUT DATA
 library(GenomicRanges)
-vcf <- readVcf("COAD_test_sap.vcf", "hg19")
+library(VariantAnnotation)
+vcf <- readVcf(input_mutations, "hg19")
 gr.panel.mut<-rowRanges(vcf)
 seqlevelsStyle(gr.panel.mut) <- "UCSC"
 test<-data.frame(ref=gr.panel.mut$REF,alt=unlist(gr.panel.mut$ALT))
@@ -155,4 +162,5 @@ rates.panel<-mapply(
 predict.value<-predict_poisson_smb_2l(possion.model, rates.panel)
 pre.tmb<-data.frame(tmb=predict.value*1000000)
 rownames(pre.tmb)<-rownames(mut.count)
+colnames(pre.tmb)<-"mut/Mb"
 write.table(pre.tmb,"Predict_TMB.txt",sep = "\t",quote = F)

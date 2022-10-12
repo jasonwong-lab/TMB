@@ -1,0 +1,5 @@
+intersectBed -a /home/fanghu/Projects/tmb/data/ucsc_gdc/hg19_data_allsnv_indel/total/GDC-PANCAN.mutect2_snv_hg19.bed -b ~/Projects/tmb/shiny/package/master/TMB/TMB/test/test_panel.bed | perl get_mut.pl - > panel_mut.txt
+nucBed -fi ~/Database/HG19_UCSC/hg19_ucsc.fasta -bed ~/Projects/tmb/shiny/package/master/TMB/TMB/test/test_panel.bed |sed 1d |perl -lane 'BEGIN{$a=0;$t=0;$g=0;$c=0;}{$a+=$F[5];$c+=$F[6];$g+=$F[7];$t+=$F[8]}END{print "$a\t$c\t$g\t$t"}' > panel_nuc.txt
+intersectBed -a ~/Projects/tmb/data/ucsc_gdc/hg19_data_nonsysnv_indel/total/GDC-PANCAN.mutect2_snv_hg19.bed -b ~/Projects/tmb/shiny/package/master/TMB/TMB/data/Exome.final.bed | perl get_mut.pl - > expected_panel_mut.txt &
+nucBed -fi ~/Database/HG19_UCSC/hg19_ucsc.fasta -bed ~/Projects/tmb/shiny/package/master/TMB/TMB/data/Exome.final.bed |sed 1d |perl -lane 'BEGIN{$a=0;$t=0;$g=0;$c=0;}{$a+=$F[5];$c+=$F[6];$g+=$F[7];$t+=$F[8]}END{print "$a\t$c\t$g\t$t"}' > expected_panel_nuc.txt &
+Rscript two_layer_Poisson_model.R ~/Projects/tmb/shiny/package/master/TMB/TMB/test/test_sap.vcf panel_mut.txt panel_nuc.txt expected_panel_mut.txt expected_panel_nuc.txt &
