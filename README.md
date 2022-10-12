@@ -8,8 +8,8 @@ Three input files are required to run the model:
 
 ## Step 1: Prepare data to train the model
 ```
-intersectBed -a GDC-PANCAN.mutect2_snv_hg19.bed -b sequencing_panel | perl get_mut.pl - > panel_mut.txt
-intersectBed -a GDC-PANCAN.mutect2_snv_hg19.bed -b expected_panel | perl get_mut.pl - > expected_panel_mut.txt
+intersectBed -a GDC-PANCAN.mutect2_snv_hg19_all.bed -b sequencing_panel | perl get_mut.pl - > panel_mut.txt
+intersectBed -a GDC-PANCAN.mutect2_snv_hg19_nosilent.bed -b expected_panel | perl get_mut.pl - > expected_panel_mut.txt
 nucBed -fi hg19.fasta -bed sequencing_panel|sed 1d |perl -lane 'BEGIN{$a=0;$t=0;$g=0;$c=0;}{$a+=$F[5];$c+=$F[6];$g+=$F[7];$t+=$F[8]}END{print "$a\t$c\t$g\t$t"}' > panel_nuc.txt
 nucBed -fi hg19.fasta -bed expected_panel|sed 1d |perl -lane 'BEGIN{$a=0;$t=0;$g=0;$c=0;}{$a+=$F[5];$c+=$F[6];$g+=$F[7];$t+=$F[8]}END{print "$a\t$c\t$g\t$t"}' > expected_panel_nuc.txt
 ```
