@@ -1,8 +1,7 @@
-# TMB conversion
-Use two layer Poisson model to convert TMB between genomic regions.
+## Use two layer Poisson model to convert TMB between genomic regions
 ## Required input files
 Three input files are required to run the model:
-* input_mutations: Detected mutations in VCF format.
+* input_mutations: Detected mutations from sequencing panel in VCF format.
 * sequencing_panel: Input panel regions in BED (Browser Extensible Data) format.
 * expected_panel: Expected genomic regions in BED (Browser Extensible Data) format.
 
@@ -21,8 +20,8 @@ Rscript two_layer_Poisson_model.R input_mutations panel_mut.txt panel_nuc.txt ex
 
 ## Note
 * Several expected genomic regions have been deposited in the data folder.
-* Scripts get_mut.pl and two_layer_Poisson_model.R are in the scripts folder.
-* bedtools need to be installed beforehand. 
+* Scripts get_mut.pl and two_layer_Poisson_model.R are in the script folder.
+* bedtools need to be installed beforehand to use 'intersectBed' and 'nucBed' function. 
 
 
 
