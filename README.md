@@ -21,5 +21,5 @@ The app is available at: https://cancergenomics-explore.shinyapps.io/shiny_tmb/
 
 ## Note
 
-The stand-alone R package can be downloaded at: https://github.com/jasonwong-lab/TMB/tree/master
+The stand-alone R scripts can be downloaded at: https://github.com/jasonwong-lab/TMB/tree/master
 
